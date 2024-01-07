@@ -11,6 +11,7 @@ app = FastAPI()
 import os
 from dotenv import load_dotenv  
 
+#connecting to GPT model
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
@@ -21,6 +22,8 @@ def gpt_completion(prompt,model = 'gpt-3.5-turbo'):
             messages=[{"role": "user", "content": prompt}]
         )
    return completion.choices[0].message.content
+
+#communicating with the LLM
 @app.post("/analysisEngine/")
 async def orders(request: Request):
 	
