@@ -11,7 +11,8 @@ app = FastAPI()
 import os
 from dotenv import load_dotenv  
 
-#connecting to GPT model
+results_combined = ""
+
 load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
@@ -22,8 +23,6 @@ def gpt_completion(prompt,model = 'gpt-3.5-turbo'):
             messages=[{"role": "user", "content": prompt}]
         )
    return completion.choices[0].message.content
-
-#communicating with the LLM
 @app.post("/analysisEngine/")
 async def orders(request: Request):
 	
@@ -99,6 +98,7 @@ async def orders(request: Request):
                     solution=solution)
 		response = llm(messages)
 		print(response.content)
+		results_combined += str(response.content+"\n")
 		return response.content
 
 		# return data_json
@@ -177,6 +177,7 @@ async def orders(request: Request):
                     solution=solution)
 		response = llm(messages)
 		print(response.content)
+		results_combined += str(response.content+"\n")
 		return response.content
 
 		# return data_json
@@ -236,6 +237,7 @@ async def orders(request: Request):
                     solution=solution)
 		response = llm(messages)
 		print(response.content)
+		results_combined += str(response.content+"\n")
 		return response.content
 
 		# return data_json
@@ -309,6 +311,141 @@ async def orders(request: Request):
                     solution=solution)
 		response = llm(messages)
 		print(response.content)
+		results_combined += str(response.content+"\n")
+		return response.content
+
+		# return data_json
+	except Exception as e:
+		return {"error": str(e)}
+
+
+@app.post("/envFeatures/")
+async def orders(request: Request):
+	
+	try:
+		body = await request.json()
+		problem = body.get("problem", "")
+		solution = body.get("solution", "")
+		print(problem)
+		print(solution)		
+		llm = ChatOpenAI(api_key=api_key,temperature = 0.2)
+		template = """
+
+		You are a decision support tool tasked with analyzing the sustainability impacts of solutions in the circular economy. For each solution provided, generate 8-10 key insights and facts that highlight its unique selling points (USPs) from a sustainability perspective. These should include quantifiable improvements or significant features such as percentage reduction in carbon emissions, water usage reduction, increased recycling rates, energy efficiency, and other relevant sustainability metrics.
+
+		Task:
+		- Analyze the given solution in the context of the circular economy.
+		- Identify 8-10 key insights and facts about the solution's impact on sustainability or important features related to circular economy improvements.
+		- Include quantitative data like percentages, ratios, or comparative figures where possible to illustrate the solution's impact.
+
+		Output Format:
+		Provide the response in JSON format, structured as follows:
+
+		```json
+		{{
+		"Solution": "Name of the Solution",
+		"SustainabilityInsights": [
+			{{
+			"Insight": "Description of insight or fact, including any relevant quantitative data"
+			}},
+			{{
+			"Insight": "Description"
+			}},
+			// ... additional insights
+			{{
+			"Insight": "Description"
+			}}
+		]
+		}}
+
+
+		Here is the problem and the proposed solution:
+		problem: {problem}
+		solution: {solution}
+		"""
+
+
+		print("done template")
+		
+		prompt_template = ChatPromptTemplate.from_template(template)
+		messages = prompt_template.format_messages(
+                    problem=problem,
+                    solution=solution)
+		response = llm(messages)
+		print(response.content)
+		results_combined += str(response.content+"\n")
+		return response.content
+
+		# return data_json
+	except Exception as e:
+		return {"error": str(e)}
+	
+
+
+@app.post("/envMetrics/")
+async def orders(request: Request):
+	
+	try:
+		body = await request.json()
+		problem = body.get("problem", "")
+		solution = body.get("solution", "")
+		print(problem)
+		print(solution)		
+		llm = ChatOpenAI(api_key=api_key,temperature = 0.2)
+		template = """
+		You are a decision support tool for venture capitalists and investors focusing on the circular economy. Your role is to evaluate problems and proposed solutions in this area. For each solution presented, provide a rating out of 5 based on the following metrics, along with a 2-3 sentence explanation for each rating. Additionally, consider aspects like collaboration and regulatory board certifications that could be valuable, as well as sustainability metrics like social impact and contribution to local communities, which appeal to a broad range of investors.
+
+		Evaluation Metrics:
+
+		1. **Regulatory Compliance and Certifications:**
+		- Assess adherence to local and international environmental regulations.
+		- Evaluate the possession of sustainability certifications (e.g., LEED, Green Seal).
+
+		2. **Social Impact:**
+		- Analyze the solution's capacity for job creation, particularly in green jobs.
+		- Consider the impact on local communities and contribution to social development.
+
+		3. **Partnerships and Collaborations:**
+		- Evaluate collaborations with other companies, governments, or NGOs for sustainability goals.
+
+		Output Format:
+
+		Your response should be in JSON format, structured as follows:
+
+		```json
+		{{
+		"SolutionName":
+			"Ratings": {{
+			"Regulatory Compliance and Certifications": {{
+			"Score": 1-5,
+			"Explanation": "Provide your analysis on the solution's adherence to environmental regulations and possession of sustainability certifications."
+			}},
+			"Social Impact": {{
+			"Score": 1-5,
+			"Explanation": "Discuss the solution's job creation potential, especially in green jobs, and its impact on local communities and social development."
+			}},
+			"Partnerships and Collaborations": {{
+			"Score": 1-5,
+			"Explanation": "Evaluate the extent and effectiveness of collaborations with other companies, governments, or NGOs in achieving sustainability goals."
+			}}
+		}}
+		}}
+		```
+
+		Here is the problem and the proposed solution:
+		problem: {problem}
+		solution: {solution}
+		"""
+
+		print("done template")
+		
+		prompt_template = ChatPromptTemplate.from_template(template)
+		messages = prompt_template.format_messages(
+                    problem=problem,
+                    solution=solution)
+		response = llm(messages)
+		print(response.content)
+		results_combined += str(response.content+"\n")
 		return response.content
 
 		# return data_json
@@ -317,6 +454,134 @@ async def orders(request: Request):
 
 	
 
+
+@app.post("/summaryScore/")
+async def orders(request: Request):
+	
+	try:
+		body = await request.json()
+		problem = body.get("problem", "")
+		solution = body.get("solution", "")
+		print(problem)
+		print(solution)		
+		llm = ChatOpenAI(api_key=api_key,temperature = 0.2)
+		template = """
+		You are a decision support tool tasked with providing an overall validation or evaluation of a business idea, based on results from market analysis, idea analysis, and environment and social impact analysis. Each analysis provides ratings and reviewed facts about the solution. Using this data, you will give an overall evaluation in the following categories:
+
+		1. Market and Financial Potential:
+		- Provide a score out of 40.
+		- Explain the reasoning based on market analysis data.
+
+		2. Environment and Social Potential:
+		- Provide a score out of 40.
+		- Explain the reasoning based on environmental and social impact data.
+
+		3. Overall Idea:
+		- Provide a score out of 20.
+		- Explain the reasoning based on the overall idea analysis.
+
+		After scoring in each category, calculate a total score out of 100 and provide a 3-4 sentence summary of the overall evaluation of the idea.
+
+		Output Format:
+		Provide the response in JSON format, structured as follows:
+
+		```json
+		{{
+		"IdeaEvaluation": {{
+			"MarketAndFinancialPotential": {{
+			"Score": 0-40,
+			"Explanation": "Your explanation based on market analysis data."
+			}},
+			"EnvironmentAndSocialPotential": {{
+			"Score": 0-40,
+			"Explanation": "Your explanation based on environment and social impact data."
+			}},
+			"OverallIdea": {{
+			"Score": 0-20,
+			"Explanation": "Your explanation based on the overall idea analysis."
+			}},
+			"TotalScore": 0-100,
+			"Summary": "3-4 sentence summary of the overall evaluation."
+		}}
+		}}
+
+		Here is the data about different analysis done: {results_combined}
+		"""
+
+		print("done template")
+		
+		prompt_template = ChatPromptTemplate.from_template(template)
+		messages = prompt_template.format_messages(
+                    results_combined=results_combined)
+		response = llm(messages)
+		print(response.content)
+		results_combined += str(response.content+"\n")
+		return response.content
+
+		# return data_json
+	except Exception as e:
+		return {"error": str(e)}
+	
+
+@app.post("/proConFeedback/")
+async def orders(request: Request):
+	
+	try:
+		body = await request.json()
+		problem = body.get("problem", "")
+		solution = body.get("solution", "")
+		print(problem)
+		print(solution)		
+		llm = ChatOpenAI(api_key=api_key,temperature = 0.2)
+		template = """
+		You are a decision support tool tasked with synthesizing information from market analysis, idea analysis, and environmental and social impact analysis. Based on these analyses, which include ratings and evaluated reviews or facts about a proposed solution to a problem, you will provide a balanced assessment. This will include identifying key strengths and weaknesses of the solution, as well as offering constructive feedback for improvement.
+
+		Task:
+		1. Identify 3-5 important pros (strengths) of the proposed solution based on the analysis data.
+		2. Identify 3-5 important cons (weaknesses) of the proposed solution based on the analysis data.
+		3. Provide 3-5 pieces of important feedback as an evaluator to improve the solution based on the analysis data.
+
+		Output Format:
+		Provide the response in JSON format, structured as follows:
+
+		```json
+		{{
+		"SolutionAssessment": {{
+			"Pros": [
+			"Pro 1: Description of the first pro.",
+			"Pro 2: Description of the second pro.",
+			// ... additional pros
+			],
+			"Cons": [
+			"Con 1: Description of the first con.",
+			"Con 2: Description of the second con.",
+			// ... additional cons
+			],
+			"Feedback": [
+			"Feedback 1: Description of the first piece of feedback.",
+			"Feedback 2: Description of the second piece of feedback.",
+			// ... additional feedback
+			]
+		}}
+		}}
+
+
+		Here is the data about different analysis done: {results_combined}
+		"""
+
+		print("done template")
+		
+		prompt_template = ChatPromptTemplate.from_template(template)
+		messages = prompt_template.format_messages(
+                    results_combined=results_combined)
+		response = llm(messages)
+		print(response.content)
+		results_combined += str(response.content+"\n")
+		return response.content
+
+		# return data_json
+	except Exception as e:
+		return {"error": str(e)}
 
 
 
