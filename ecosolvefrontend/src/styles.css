@@ -1,0 +1,16 @@
+body{
+    background-color: #FFF;
+    font-family: 'Inter', sans-serif;
+}
+
+.metric-header{
+    color: #6941C6;
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+

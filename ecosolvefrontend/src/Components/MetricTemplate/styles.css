@@ -1,0 +1,105 @@
+.metric-header-text{
+    color: #6941C6;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-left: 25px;
+    margin-top: 20px;
+    justify-self: start;
+}
+
+.metric-header{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+.metric-header-dropdown{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+.metric-content-summary{
+    color: rgba(148, 46, 229, 0.93);
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.metric-content{
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+.metric-content-summary-text{
+    color: #000;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    width: 402px;
+    height: 530px;
+    flex-shrink: 0;
+    fill: var(--White, #FFF);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    border-radius: 5%;
+    margin-bottom: 30px;
+    outline: none;
+    align-items: center;
+}
+
+@keyframes float{
+    0%{bottom: 20px;}
+    100%{bottom: 0px;}
+}
+
+.card-container:hover{
+    animation: float 2s infinite alternate-reverse ease-in-out; 
+    position: relative;
+    bottom: 0px;
+}
+
+.card-container-title{
+    color: rgba(105, 65, 198, 0.64);
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.card-container-text{
+    color: #101828;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.circle-progress-container{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.breakdown-table{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}

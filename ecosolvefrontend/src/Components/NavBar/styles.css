@@ -1,0 +1,34 @@
+.logo-container{
+    padding: 7.5px 39px 3.5px 13px;
+    display: flex;
+    padding: 0px 32px;
+    align-items: center;
+    gap: 5px;
+    color: #6941C6;
+}
+
+.logo-purple{
+    display: flex;
+    height: 22px;
+    padding: 10px 7px 10px 15px;
+    justify-content: flex-end;
+    align-items: center;
+    background: #6941C6;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    color: #FFF;
+}
+
+.navbar-text{
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-color 1s ease-in-out 100ms;
+    border-radius: 10%;
+}
+
+.navbar-text:hover{
+    background-color: #6941C6;
+    color: #FFF;
+}
+
