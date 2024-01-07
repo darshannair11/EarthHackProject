@@ -25,8 +25,11 @@ def gpt_completion(prompt,model = 'gpt-3.5-turbo'):
    return completion.choices[0].message.content
 @app.post("/analysisEngine/")
 async def orders(request: Request):
+	global results_combined
+
 	
 	try:
+		
 		body = await request.json()
 		problem = body.get("problem", "")
 		solution = body.get("solution", "")
@@ -108,6 +111,7 @@ async def orders(request: Request):
 
 @app.post("/marketAnalysis/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -188,6 +192,7 @@ async def orders(request: Request):
 
 @app.post("/financialAnalysis/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -248,6 +253,7 @@ async def orders(request: Request):
 
 @app.post("/envAnalysis/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -321,6 +327,7 @@ async def orders(request: Request):
 
 @app.post("/envFeatures/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -384,6 +391,7 @@ async def orders(request: Request):
 
 @app.post("/envMetrics/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -457,6 +465,7 @@ async def orders(request: Request):
 
 @app.post("/summaryScore/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
@@ -525,6 +534,7 @@ async def orders(request: Request):
 
 @app.post("/proConFeedback/")
 async def orders(request: Request):
+	global results_combined
 	
 	try:
 		body = await request.json()
