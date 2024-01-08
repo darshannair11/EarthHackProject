@@ -131,7 +131,7 @@ const ContentSummary = ({content}) => {
         <div className="level-container" style={{width:"100%"}}>Total Score : 95 / 100</div>
          <MarketCardTemplate key={1} title={"Market And Financial Potential"} level={content.IdeaEvaluation.MarketAndFinancialPotential.Score+"/40"} rationale={content.IdeaEvaluation.MarketAndFinancialPotential.Explanation}/>
          <MarketCardTemplate key={2} title={"Environment And Social Potential"} level={content.IdeaEvaluation.EnvironmentAndSocialPotential.Score+"/40"} rationale={content.IdeaEvaluation.EnvironmentAndSocialPotential.Explanation}/>
-         <MarketCardTemplate key={3} title={"Overall Idea"} level={content.IdeaEvaluation.OverallIdea.Score+"/40"} rationale={content.IdeaEvaluation.OverallIdea.Explanation}/>
+         <MarketCardTemplate key={3} title={"Overall Idea"} level={content.IdeaEvaluation.OverallIdea.Score+"/20"} rationale={content.IdeaEvaluation.OverallIdea.Explanation}/>
     </div>
     </div>
 }
