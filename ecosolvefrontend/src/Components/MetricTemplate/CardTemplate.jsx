@@ -6,12 +6,12 @@ import { useCountUp } from 'use-count-up';
 import { useIntersection } from "../Utils/visibility";
 import "./styles.css";
 
-const CardTemplate = () => {
+export const CardTemplate = ({title,score,rationale}) => {
     const { value: value2, reset } = useCountUp({
         isCounting: true,
         duration: 1,
         start: 0,
-        end: 75,
+        end: (score/5)*100,
       });
 
     const triggerRef = React.useRef(null);
@@ -24,12 +24,22 @@ const CardTemplate = () => {
       }, [reset, isVisible]);
     
     return <div className="card-container">
-        <p className="card-container-title">Success Probability</p>
+        <p className="card-container-title">{title}</p>
         <div ref={triggerRef} className="circle-progress-container"><CircularProgress size="lg" determinate value={value2}>
           <Typography>{value2}%</Typography>
         </CircularProgress></div>
-        <p className="card-container-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p className="card-container-text">{rationale}</p>
     </div>
 }
 
-export default CardTemplate;
+export const MarketCardTemplate = ({title,level,rationale}) => {
+
+    
+    
+    return <div className="card-container">
+        <p className="card-container-title">{title}</p>
+        {level && <p className="level-container">{level}</p>}
+        <p className="card-container-text">{rationale}</p>
+    </div>
+}
+

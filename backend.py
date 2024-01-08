@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
 import os
 import uvicorn
@@ -9,7 +10,15 @@ from langchain.output_parsers import StructuredOutputParser
 
 app = FastAPI()
 import os
-from dotenv import load_dotenv  
+from dotenv import load_dotenv
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 results_combined = ""
 
@@ -473,7 +482,7 @@ async def orders(request: Request):
 		solution = body.get("solution", "")
 		print(problem)
 		print(solution)		
-		llm = ChatOpenAI(api_key=api_key,temperature = 0.2)
+		llm = ChatOpenAI(api_key=api_key,temperature = 0.2,model_name="gpt-3.5-turbo-16k")
 		template = """
 		You are a decision support tool tasked with providing an overall validation or evaluation of a business idea, based on results from market analysis, idea analysis, and environment and social impact analysis. Each analysis provides ratings and reviewed facts about the solution. Using this data, you will give an overall evaluation in the following categories:
 
