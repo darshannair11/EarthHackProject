@@ -69,8 +69,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setIdeaAnalysis(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setIdeaAnalysis(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
@@ -83,8 +83,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setMarketAnalysis(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setMarketAnalysis(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
@@ -109,8 +109,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setEnvironmentAnalysis(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setEnvironmentAnalysis(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
@@ -123,8 +123,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setVentureCapital(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setVentureCapital(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
@@ -140,8 +140,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setSustainabilityAnalysis(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setSustainabilityAnalysis(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
@@ -154,8 +154,8 @@ const App=() => {
             solution: doc['Suggested Solution']
           })
           .then((response) => {
-            setSummary(JSON.parse(response.data.replace("False","false").replace("True","true")));
-            console.log(JSON.parse(response.data.replace("False","false").replace("True","true")));
+            setSummary(JSON.parse(response?.data.replace("False","false").replace("True","true")));
+            console.log(JSON.parse(response?.data.replace("False","false").replace("True","true")));
             setAnalyzed(true);
             setLoading(false);
           }, (error) => {
